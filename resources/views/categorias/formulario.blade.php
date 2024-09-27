@@ -9,9 +9,9 @@
 </head>
 <body>
     <main>
-        <form method="POST" action="#">
+        <form method="POST" @if($categoria) action="{{route('categorias-conta.update', $categoria->getKey())}}" @else action="{{route('categorias-conta.store')}}" @endif>
             @csrf
-            <div class="">
+            <div>
                 <label>Nome</label>
                 <input type="text" name="nome" id="nome" @if($categoria) value="{{$categoria->nome}}" @endif>
             </div>
