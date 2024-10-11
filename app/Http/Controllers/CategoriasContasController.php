@@ -9,18 +9,18 @@ class CategoriasContasController extends Controller
 {
     public function index()
     {
-        $categorias = CategoriaConta::all();
+        $categoriasConta = CategoriaConta::all();
 
-        return view('categorias.index', compact('categorias'));
+        return view('categorias-conta.index', compact('categoriasConta'));
     }
 
-    public function form(CategoriaConta $categoria = null)
+    public function form(CategoriaConta $categoriaConta = null)
     {
-        if ($categoria) {
-            $categoria = CategoriaConta::find($categoria->getKey());
+        if ($categoriaConta) {
+            $categoriaConta = CategoriaConta::find($categoriaConta->getKey());
         }
 
-        return view('categorias.formulario', compact('categoria'));
+        return view('categorias-conta.formulario', compact('categoriaConta'));
     }
 
     public function store(Request $request){
@@ -31,17 +31,17 @@ class CategoriasContasController extends Controller
         return redirect()->route('categorias-conta.index')->with('success', 'Categoria cadastrada com sucesso!');
     }
 
-    public function update(Request $request, CategoriaConta $categoria)
+    public function update(Request $request, CategoriaConta $categoriaConta)
     {
         $dados = $request->all();
-        $categoria->update($dados);
+        $categoriaConta->update($dados);
 
         return redirect()->route('categorias-conta.index')->with('success', 'Categoria atualizada com sucesso!');
     }
 
-    public function destroy(Request $request, CategoriaConta $categoria)
+    public function destroy(Request $request, CategoriaConta $categoriaConta)
     {
-        $categoria->delete();
+        $categoriaConta->delete();
 
         return redirect()->route('categorias-conta.index')->with('success', 'Categoria deletada com sucesso!');
     }
