@@ -19,6 +19,8 @@ return new class extends Migration
             $table->float('debit_value', 10, 2);
             $table->date('due_date');
             $table->enum('status', ['pending', 'payment_completed', 'late']);
+            $table->dateTime('payment_date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

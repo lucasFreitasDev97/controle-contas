@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('debit_registration_id')->constrained('debit_registrations');
             $table->string('path_to_debit_file')->nullable();
             $table->string('path_to_payment_proof_file')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
