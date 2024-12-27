@@ -9,16 +9,29 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <label for="select-options" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Escolha uma opção
-                    </label>
-                    <select id="select-options" name="options" class="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500">
-                        <option value="opcao1">Opção 1</option>
-                        <option value="opcao2">Opção 2</option>
-                        <option value="opcao3">Opção 3</option>
-                        <option value="opcao4">Opção 4</option>
-                    </select>
+                    <a href="#">
+                        <x-primary-button class="mb-4">
+                            {{ __('+ Criar novo registro de conta') }}
+                        </x-primary-button>
+                    </a>
                 </div>
+                <form action="">
+                    @csrf
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <label for="select-options" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Escolha uma opção
+                        </label>
+                        <select id="select-options" name="options" class="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500">
+                            <option value="opcao1">Opção 1</option>
+                            <option value="opcao2">Opção 2</option>
+                            <option value="opcao3">Opção 3</option>
+                            <option value="opcao4">Opção 4</option>
+                        </select>
+                    </div>
+                    <x-primary-button class="ms-7 mb-4">
+                        {{ __('Exibir') }}
+                    </x-primary-button>
+                </form>
             </div>
         </div>
     </div>
@@ -36,6 +49,7 @@
                             <th class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-left">Data de Vencimento</th>
                             <th class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-left">Status</th>
                             <th class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-left">Dia / Hora do Pagamento</th>
+                            <th class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-left">Ações</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,10 +60,14 @@
                             <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">02/01/2025</td>
                             <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">Pendente</td>
                             <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"></td>
+                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">
+                                <a href="#">Editar | </a>
+                                <a href="#">Visualizar | </a>
+                                <a href="#">Excluir | </a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
