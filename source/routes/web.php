@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function (){
    Route::get('/debits', [DebitController::class, 'index'])->name('debits.index');
+   Route::get('/debits/create', [DebitController::class, 'create'])->name('debits.create');
 
    Route::get('/debit-registrations/', [DebitRegistrationController::class, 'index'])->name('debit-registrations.index');
 });
