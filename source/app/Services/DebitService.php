@@ -26,11 +26,6 @@ class DebitService
         $debit->update($data);
     }
 
-    public function show(Debit $debit): Model
-    {
-        return $debit;
-    }
-
     public function destroy(Debit $debit): void
     {
         $debit->delete();

@@ -23,15 +23,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"># 1</td>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">Água</td>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">
-                                <a href="#">Editar | </a>
-                                <a href="#">Visualizar | </a>
-                                <a href="#">Excluir | </a>
-                            </td>
-                        </tr>
+                        @foreach($debits as $debit)
+                            <tr>
+                                <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"># {{$debit->getKey()}}</td>
+                                <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">{{$debit->name}}</td>
+                                <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">
+                                    <a href="{{route('debits.edit', ['debit' => $debit->getKey()])}}">Editar | </a>
+                                    <a href="#">Excluir</a>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
