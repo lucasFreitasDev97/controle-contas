@@ -62,6 +62,7 @@ class DebitController extends Controller
         $data = $request->all();
         $this->debitService->update($debit, $data);
 
+        session()->flash('success', 'Débito atualizado com sucesso!');
         return redirect(route('debits.index'));
     }
 

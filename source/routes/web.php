@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function (){
    Route::post('/debits/store', [DebitController::class, 'store'])->name('debits.store');
    Route::get('/debits/edit/{debit}', [DebitController::class, 'edit'])->name('debits.edit');
    Route::put('/debits/update/{debit}', [DebitController::class, 'update'])->name('debits.update');
-   Route::delete('/debits/destroy/{debit}', [DebitController::class, 'destroy'])->name('debits.show');
+   Route::get('/debits/destroy/{debit}', [DebitController::class, 'destroy'])->name('debits.destroy');
 
    Route::get('/debit-registrations/', [DebitRegistrationController::class, 'index'])->name('debit-registrations.index');
 });
