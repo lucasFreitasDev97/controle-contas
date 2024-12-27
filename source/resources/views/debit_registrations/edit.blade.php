@@ -1,0 +1,117 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __("Editar registro de conta") }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ route('debit-registrations.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="flex flex-wrap gap-4">
+                            <!-- Select Field -->
+                            <div class="flex-1">
+                                <label for="select-options" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Conta
+                                </label>
+                                <select id="select-options" name="debit_id"
+                                        class="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500">
+                                    @foreach($debits as $debit)
+                                        <option value="{{ $debit->getKey() }}" @if($debit->getKey() == $debitRegistration->debit_id) selected @endif>{{ $debit->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <!-- Input Field -->
+                            <div class="flex-1">
+                                <x-input-label for="year" :value="__('Ano')" />
+                                <x-text-input id="year" class="mt-2 block w-full" type="number" name="year" value="{{$debitRegistration->year}}" required autofocus />
+                                <x-input-error :messages="$errors->get('year')" class="mt-2" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="flex flex-wrap gap-4">
+                            <!-- Select Field -->
+                            <div class="flex-1">
+                                <label for="month" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Mês
+                                </label>
+                                <select id="month" name="month"
+                                        class="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500">
+                                    @foreach($months as $key => $month)
+                                        <option value="{{ $key }}" @if($debitRegistration->month == $key) selected @endif>{{ $month }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Input Field -->
+                            <div class="flex-1">
+                                <x-input-label for="debit_value" :value="__('Valor')" />
+                                <x-text-input id="debit_value" class="mt-2 block w-full" type="text" name="debit_value" value="{{str_replace('.', ',', $debitRegistration->debit_value)}}" required autofocus />
+                                <x-input-error :messages="$errors->get('debit_value')" class="mt-2" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex-1">
+                                <x-input-label for="due_date" :value="__('Data de Vencimento')" />
+                                <x-text-input id="due_date" class="mt-2 block w-full" type="date" name="due_date" value="{{ $debitRegistration->due_date->format('Y-m-d') }}" required autofocus />
+                                <x-input-error :messages="$errors->get('due_date')" class="mt-2" />
+                            </div>
+
+                            <div class="flex-1">
+                                <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Status
+                                </label>
+                                <select id="status" name="status"
+                                        class="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="pending">Pendente</option>
+                                    <option value="payment_completed">Paga</option>
+                                    <option value="late">Atrasada</option>
+                                </select>
+                            </div>
+
+                            <div class="flex-1">
+                                <x-input-label for="payment_date" :value="__('Data de Pagamento')" />
+                                <x-text-input id="payment_date" class="mt-2 block w-full" type="date" name="payment_date" value="{{ $debitRegistration->payment_date->format('Y-m-d') }}" required autofocus />
+                                <x-input-error :messages="$errors->get('payment_date')" class="mt-2" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex-1">
+                                <x-input-label for="path_to_debit_file" :value="__('Documento')" />
+                                <x-text-input id="path_to_debit_file" class="mt-2 block w-full" type="file" name="path_to_debit_file" :value="old('path_to_debit_file')" required autofocus />
+                                <x-input-error :messages="$errors->get('path_to_debit_file')" class="mt-2" />
+                                <br>
+                                @if($debitRegistration->debitRegistrationFiles->path_to_debit_file)
+                                    <a href="{{$debitRegistration->debitRegistrationFiles->path_to_debit_file}}">Clique aqui para acessar o documento anexado</a>
+                                @endif
+                            </div>
+
+                            <div class="flex-1">
+                                <x-input-label for="path_to_payment_proof_file" :value="__('Comprovante de Pagamento')" />
+                                <x-text-input id="path_to_payment_proof_file" class="mt-2 block w-full" type="file" name="path_to_payment_proof_file" :value="old('path_to_payment_proof_file')" required autofocus />
+                                <x-input-error :messages="$errors->get('path_to_payment_proof_file')" class="mt-2" />
+                                <br>
+                                @if($debitRegistration->debitRegistrationFiles->path_to_payment_proof_file)
+                                    <a href="{{$debitRegistration->debitRegistrationFiles->path_to_payment_proof_file}}">Clique aqui para acessar o comprovante de pagamento anexado</a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <x-primary-button>
+                                {{ __('Salvar') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
+
+

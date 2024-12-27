@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DebitRegistration;
 use App\Services\DebitRegistrationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,9 +23,13 @@ class DebitRegistrationController extends Controller
     public function index(): View
     {
         $debits = $this->debitRegistrationService->getAllDebits();
+        $debitRegistrations =$this->debitRegistrationService->getAllDebitRegistrations();
+        $months = $this->debitRegistrationService->getMonths();
 
         return view('debit_registrations.index', [
             'debits' => $debits,
+            'debitRegistrations' => $debitRegistrations,
+            'months' => $months,
         ]);
     }
 
@@ -66,9 +71,15 @@ class DebitRegistrationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(DebitRegistration $debitRegistration): View
     {
-        //
+        $debits = $this->debitRegistrationService->getAllDebits();
+        $months = $this->debitRegistrationService->getMonths();
+        return \view('debit_registrations.edit', [
+            'months' => $months,
+            'debitRegistration' => $debitRegistration,
+            'debits' => $debits,
+        ]);
     }
 
     /**

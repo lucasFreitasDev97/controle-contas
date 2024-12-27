@@ -12,11 +12,14 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DebitRegistrationService
 {
+    public function getAllDebitRegistrations(): Collection
+    {
+        return DebitRegistration::all();
+    }
     public function getAllDebits(): Collection
     {
         return Debit::all();
     }
-
     public function getMonths(): array
     {
         return [
