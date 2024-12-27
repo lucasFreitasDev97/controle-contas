@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\DebitRegistrationService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -44,9 +45,14 @@ class DebitRegistrationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $data = $request->all();
+
+        $this->debitRegistrationService->save($data);
+
+        session()->flash('success', 'Registro de conta salva com sucesso!');
+        return redirect(route('debit-registrations.index'));
     }
 
     /**

@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function (){
 
    Route::get('/debit-registrations/', [DebitRegistrationController::class, 'index'])->name('debit-registrations.index');
    Route::get('/debit-registrations/create', [DebitRegistrationController::class, 'create'])->name('debit-registrations.create');
+   Route::post('/debit-registrations/store', [DebitRegistrationController::class, 'store'])->name('debit-registrations.store');
 });
 
 require __DIR__.'/auth.php';
