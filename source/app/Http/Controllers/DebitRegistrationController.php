@@ -2,25 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\DebitRegistrationService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DebitRegistrationController extends Controller
 {
+    protected DebitRegistrationService $debitRegistrationService;
+
+    public function __construct(DebitRegistrationService $debitRegistrationService)
+    {
+        $this->debitRegistrationService = $debitRegistrationService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        return view('debit_registrations.index');
+        $debits = $this->debitRegistrationService->getAllDebits();
+
+        return view('debit_registrations.index', [
+            'debits' => $debits,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $debits = $this->debitRegistrationService->getAllDebits();
+        $months = $this->debitRegistrationService->getMonths();
+
+        return \view('debit_registrations.create', [
+            'debits' => $debits,
+            'months' => $months,
+        ]);
     }
 
     /**

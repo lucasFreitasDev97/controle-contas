@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="#">
+                    <a href="{{route('debit-registrations.create')}}">
                         <x-primary-button class="mb-4">
                             {{ __('+ Criar novo registro de conta') }}
                         </x-primary-button>
@@ -19,13 +19,13 @@
                     @csrf
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <label for="select-options" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            Escolha uma opção
+                            Conta
                         </label>
                         <select id="select-options" name="options" class="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500">
-                            <option value="opcao1">Opção 1</option>
-                            <option value="opcao2">Opção 2</option>
-                            <option value="opcao3">Opção 3</option>
-                            <option value="opcao4">Opção 4</option>
+                            <option value="all">Todas</option>
+                            @foreach($debits as $debit)
+                                <option value="{{$debit->getKey()}}">{{$debit->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <x-primary-button class="ms-7 mb-4">
@@ -54,11 +54,11 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">2024</td>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">Dezembro</td>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">R$ 55,40</td>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">02/01/2025</td>
-                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">Pendente</td>
+                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"></td>
+                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"></td>
+                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"></td>
+                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"></td>
+                            <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"></td>
                             <td class="px-4 py-2 border border-gray-300 dark:border-gray-600"></td>
                             <td class="px-4 py-2 border border-gray-300 dark:border-gray-600">
                                 <a href="#">Editar | </a>
