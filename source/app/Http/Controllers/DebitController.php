@@ -43,6 +43,8 @@ class DebitController extends Controller
         $data = $request->all();
         $this->debitService->save($data);
 
+        session()->flash('success', 'Conta criada com sucesso!');
+
         return redirect(route('debits.index'));
     }
 
@@ -62,7 +64,7 @@ class DebitController extends Controller
         $data = $request->all();
         $this->debitService->update($debit, $data);
 
-        session()->flash('success', 'Débito atualizado com sucesso!');
+        session()->flash('success', 'Conta atualizada com sucesso!');
         return redirect(route('debits.index'));
     }
 
@@ -73,6 +75,7 @@ class DebitController extends Controller
     {
         $this->debitService->destroy($debit);
 
+        session()->flash('success', 'Conta removida com sucesso!');
         return redirect(route('debits.index'));
     }
 }
